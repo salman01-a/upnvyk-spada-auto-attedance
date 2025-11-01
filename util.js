@@ -22,6 +22,9 @@ export async function login(page) {
 
   let repeatLoginCount = 0;
   while (true) {
+    
+    console.log("Menunggu elemen username muncul...");
+    await page.waitForSelector("#username", { timeout: 10000 });
     console.log("Mencoba login");
     await page.type("#username", process.env.SPADA_USERNAME);
     await page.type("#password", process.env.SPADA_PASSWORD);
