@@ -10,10 +10,12 @@ import "dotenv/config";
  * @param {puppeteer.Page} page
  * @returns {boolean}
  */
-export async function login(page) {
+export async function login(page, snapshot) {
   const loginUrl = "https://spada.upnyk.ac.id/login/index.php";
   await page.goto(loginUrl);
   await page.waitForNetworkIdle();
+  if (snapshot)
+    await addSnapshot(page);
 
   if (process.env.SPADA_PASSWORD.length == 0) {
     console.log("Password belum di set");

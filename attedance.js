@@ -135,14 +135,15 @@ async function attedance(page, id) {
 }
 
 async function run(id) {
+  await initSnapshot();
+
   const browser = await launchPuppeteer();
   const page = await browser.newPage();
   page.setDefaultTimeout(60 * 1000);
-  if (!(await login(page))) {
+  if (!(await login(page, true))) {
     await error("Presensi tidak dapat dilakukan karena login gagal.");
     return;
   }
-  await initSnapshot();
   const success = await attedance(page, id);
   await browser.close();
   if (!success) process.exitCode = 1;
