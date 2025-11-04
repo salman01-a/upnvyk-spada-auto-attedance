@@ -30,11 +30,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONTROL_ISSUE_ID: ${{ vars.CONTROL_ISSUE_ID }}
       - name: Archiving Snapshot
+        if: always()
         run: |
           cd snapshot
           zip -r -P "${{ secrets.SPADA_USERNAME }}:${{ secrets.SPADA_PASSWORD }}" ../snapshot.zip ./*
       - name: Upload snapshot
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: snapshot.zip
           path: snapshot.zip

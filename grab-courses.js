@@ -55,7 +55,7 @@ async function getCourseData(page) {
 async function run() {
   const browser = await launchPuppeteer();
   const page = await browser.newPage();
-  if (!(await login(page))) {
+  if (!(await login(page, false))) {
     console.log("Gagal login");
     return;
   }
