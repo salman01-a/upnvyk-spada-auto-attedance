@@ -14,6 +14,9 @@ import { toString } from "mdast-util-to-string";
 import { findAfter } from "unist-util-find-after";
 
 async function getAttedanceState() {
+  if (!process.env.GITHUB_TOKEN || !process.env.CONTROL_ISSUE_ID) {
+    return "present"
+  }
   const response = await axios.get(
     `https://api.github.com/repos/${process.env.GITHUB_REPOSITORY}/issues/${process.env.CONTROL_ISSUE_ID}`,
     {
