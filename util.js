@@ -1,5 +1,6 @@
 import puppeteer from "puppeteer-extra";
 import puppeteerExtraPluginUserPreferences from "puppeteer-extra-plugin-user-preferences";
+import puppeteerExtraPluginStealth from "puppeteer-extra-plugin-stealth";
 import fs from "fs-extra";
 import path from "path";
 import url from "url";
@@ -92,6 +93,7 @@ puppeteer.use(puppeteerExtraPluginUserPreferences({
     }
   }
 }))
+puppeteer.use(puppeteerExtraPluginStealth())
 
 export function launchPuppeteer() {
   if (process.env.BROWSER_WS_ENDPOINT) {
