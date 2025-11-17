@@ -94,6 +94,11 @@ puppeteer.use(puppeteerExtraPluginUserPreferences({
 }))
 
 export function launchPuppeteer() {
+  if (process.env.BROWSER_WS_ENDPOINT) {
+    return puppeteer.connect({
+      browserWSEndpoint: process.env.BROWSER_WS_ENDPOINT
+    })
+  }
   return puppeteer.launch({
     headless: isCI(),
     args: ["--disable-features=PasswordLeakDetection", "--disable-save-password-bubble", "--turn-off-password-popup"]
